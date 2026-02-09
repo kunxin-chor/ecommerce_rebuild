@@ -1,6 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Confirm Password is required'),
+    salutation: Yup.string().required('Salutation is required'),
+    country: Yup.string().required('Country is required'),
+    marketingPreferences: Yup.array()
+        .min(1, 'Please select at least one marketing preference')
+        .required('Marketing preferences are required')
+});
+
+
 function RegisterPage() {
 
     const [marketingPreferences, setMarketingPreferences] = useState([]);
@@ -40,6 +58,7 @@ function RegisterPage() {
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
+                validationSchema={validationSchema}
             >
                 {(formik) => (
                     <Form>
@@ -51,6 +70,11 @@ function RegisterPage() {
                                 id="name"
                                 name="name"
                             />
+                            <ErrorMessage
+                                name="name"
+                                component="div"
+                                className="text-danger"
+                            />
                         </div>
 
                         <div className="mb-3">
@@ -60,6 +84,11 @@ function RegisterPage() {
                                 className="form-control"
                                 id="email"
                                 name="email"
+                            />
+                            <ErrorMessage
+                                name="email"
+                                component="div"
+                                className="text-danger"
                             />
                         </div>
 
@@ -71,6 +100,11 @@ function RegisterPage() {
                                 id="password"
                                 name="password"
                             />
+                            <ErrorMessage
+                                name="password"
+                                component="div"
+                                className="text-danger"
+                            />
                         </div>
 
                         <div className="mb-3">
@@ -80,6 +114,11 @@ function RegisterPage() {
                                 className="form-control"
                                 id="confirmPassword"
                                 name="confirmPassword"
+                            />
+                            <ErrorMessage
+                                name="confirmPassword"
+                                component="div"
+                                className="text-danger"
                             />
                         </div>
 
@@ -117,6 +156,11 @@ function RegisterPage() {
                                     <label className="form-check-label" htmlFor="mrs">Mrs</label>
                                 </div>
                             </div>
+                            <ErrorMessage
+                                name="salutation"
+                                component="div"
+                                className="text-danger"
+                            />
                         </div>
 
                         {/* Marketing Preferences from JSON */}
@@ -140,6 +184,11 @@ function RegisterPage() {
                                     </label>
                                 </div>
                             ))}
+                            <ErrorMessage
+                                name="marketingPreferences"
+                                component="div"
+                                className="text-danger"
+                            />
                         </div>
 
                         <div className="mb-3">
@@ -156,6 +205,11 @@ function RegisterPage() {
                                 <option value="in">Indonesia</option>
                                 <option value="th">Thailand</option>
                             </Field>
+                            <ErrorMessage
+                                name="country"
+                                component="div"
+                                className="text-danger"
+                            />
                         </div>
 
                         <button
