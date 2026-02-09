@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Route, Switch } from 'wouter';
 import "./styles.css"
 
 import ProductCard from './ProductCard';
@@ -11,7 +12,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <HomePage />
+      <Switch>
+        <Route path="/" component={HomePage} />
+      </Switch>
       <footer className="bg-dark text-white text-center py-3">
         <div className="container">
           <p>&copy; 2023 E-Shop. All rights reserved.</p>
