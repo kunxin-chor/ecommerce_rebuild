@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'wouter';
 
 function Navbar() {
   const [isNavbarShowing, setNavbarShowing] = useState(false);
-
-  useEffect(() => {
-    const syncNavbarState = () => {
-      setNavbarShowing(window.innerWidth >= 992);
-    };
-
-    syncNavbarState();
-    window.addEventListener('resize', syncNavbarState);
-    return () => window.removeEventListener('resize', syncNavbarState);
-  }, []);
 
   const toggleNavbar = () => {
     setNavbarShowing(!isNavbarShowing);
@@ -20,7 +11,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="#">E-Shop</a>
+        <Link className="navbar-brand" href="/">E-Shop</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -31,16 +22,13 @@ function Navbar() {
         <div className={`collapse navbar-collapse ${isNavbarShowing ? "show" : ""}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
+              <Link className={`nav-link ${location=="/" ? 'active' : ''}`} aria-current="page" href="/">Home</Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Products</a>
+            <li className={`nav-item ${location=="/products" ? 'active' : ''}`}>
+              <Link className="nav-link" href="/products">Products</Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">About</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Contact</a>
+            <li className={`nav-item ${location=="/register" ? 'active' : ''}`}>
+              <Link className="nav-link" href="/register">Register</Link>
             </li>
           </ul>
         </div>

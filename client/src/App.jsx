@@ -5,6 +5,8 @@ import "./styles.css"
 import ProductCard from './ProductCard';
 import Navbar from './Navbar';
 import HomePage from './HomePage';
+import RegisterPage from './RegisterPage';
+import ProductPage from './ProductPage';
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" component={HomePage} />
+        <Route path="/products" component={ProductPage} />
+        <Route path="/register" component={RegisterPage} />
       </Switch>
       <footer className="bg-dark text-white text-center py-3">
         <div className="container">
