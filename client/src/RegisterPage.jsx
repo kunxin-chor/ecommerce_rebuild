@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useFlashMessage } from './FlashMessageStore';
+import { useLocation } from 'wouter';
 
 import * as Yup from 'yup';
 
@@ -21,7 +23,11 @@ const validationSchema = Yup.object({
 
 function RegisterPage() {
 
+    const [, setLocation] = useLocation();
+
     const [marketingPreferences, setMarketingPreferences] = useState([]);
+    const { showMessage } = useFlashMessage();
+
 
     useEffect(() => {
         const fetchMarketingPreferences = async () => {
@@ -50,6 +56,8 @@ function RegisterPage() {
         // Here you would typically make an API call to register the user
         console.log('Form values:', values);
         formikHelpers.setSubmitting(false);
+        showMessage("Registration successful", "success");
+        setLocation("/");
     };
 
     return (
