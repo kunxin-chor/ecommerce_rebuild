@@ -22,12 +22,17 @@ function Navbar() {
         <div className={`collapse navbar-collapse ${isNavbarShowing ? "show" : ""}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className={`nav-link ${location=="/" ? 'active' : ''}`} aria-current="page" href="/">Home</Link>
+              <Link className={`nav-link ${location == "/" ? 'active' : ''}`} aria-current="page" href="/">Home</Link>
             </li>
-            <li className={`nav-item ${location=="/products" ? 'active' : ''}`}>
+            <li className={`nav-item ${location == "/products" ? 'active' : ''}`}>
               <Link className="nav-link" href="/products">Products</Link>
             </li>
-            <li className={`nav-item ${location=="/register" ? 'active' : ''}`}>
+            <li className="nav-item">
+              <Link href="/cart" className={`nav-link ${location === '/cart' ? 'active' : ''}`}>
+                Cart
+              </Link>
+            </li>
+            <li className={`nav-item ${location == "/register" ? 'active' : ''}`}>
               <Link className="nav-link" href="/register">Register</Link>
             </li>
           </ul>
