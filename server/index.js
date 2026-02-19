@@ -4,6 +4,7 @@ require('dotenv').config();
 const pool = require('./database'); 
 const productsRouter = require('./routes/products');
 const usersRouter = require('./routes/users');
+const cartRouter = require('./routes/cart');
 
 const app = express();
 
@@ -17,10 +18,13 @@ app.get('/', (req, res) => {
 });
 
 // Products routes
-app.use('/products', productsRouter);
+app.use('/api/products', productsRouter);
 
 // Users routes
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+
+// Cart routes
+app.use('/api/cart', cartRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
