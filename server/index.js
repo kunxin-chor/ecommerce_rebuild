@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const pool = require('./database'); 
 const productsRouter = require('./routes/products');
+const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.get('/', (req, res) => {
 
 // Products routes
 app.use('/products', productsRouter);
+
+// Users routes
+app.use('/users', usersRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

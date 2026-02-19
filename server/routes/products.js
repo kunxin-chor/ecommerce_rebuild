@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const productsService = require('../services/products');
+const productsService = require('../services/productService');
 
 // GET all products
 router.get('/', async (req, res) => {
